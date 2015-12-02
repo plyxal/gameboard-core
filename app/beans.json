@@ -1,0 +1,75 @@
+{
+  "restify": {
+    "path": "config/restify.config",
+    "config": {
+      "name": "system-core",
+      "version": "0.0.1",
+      "port": 3000,
+      "useCORS": true
+    }
+  },
+
+  "sequelize": {
+    "path": "config/sequelize.config",
+    "config": {
+      "database": "gameboard",
+      "username": "gameboard",
+      "password": "gameboard",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  },
+
+  "systemController": {
+    "path": "controller/system.controller"
+  },
+
+  "userController": {
+    "path": "controller/user.controller"
+  },
+
+  "gameController": {
+    "path": "controller/game.controller"
+  },
+
+  "systemService": {
+    "path": "service/system.service"
+  },
+
+  "userService": {
+    "path": "service/user.service"
+  },
+
+  "gameService": {
+    "path": "service/game.service"
+  },
+
+  "userDao": {
+    "path": "dao/user.dao"
+  },
+
+  "gameDao": {
+    "path": "dao/game.dao"
+  },
+
+  "userModel": {
+    "path": "model/user.model",
+    "config": {
+      "table": "users"
+    }
+  },
+
+  "gameModel": {
+    "path": "model/game.model",
+    "config": {
+      "table": "games"
+    }
+  },
+
+  "seed": {
+    "path": "service/seed.service",
+    "config": {
+      "seedGames": true
+    }
+  }
+}

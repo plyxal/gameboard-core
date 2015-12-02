@@ -1,0 +1,20 @@
+{
+  "name": "system-core",
+  "version": "0.0.1",
+  "description": "gameboard system-core",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Paul C. Smith IV",
+  "license": "Copyright 2015",
+  "dependencies": {
+    "nioc": "^2.1.2",
+    "pg": "^4.4.1",
+    "pg-hstore": "^2.3.2",
+    "q": "^1.4.1",
+    "restify": "^3.0.3",
+    "sequelize": "^3.5.1"
+  }
+}
