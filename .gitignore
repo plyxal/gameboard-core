@@ -1,2 +1,20 @@
-#folders
-**/app/node_modules
+# file extensions
+*.iml
+*.db
+
+# folders
+**/app/lib
+**/scss/.sass-cache
+**/build
+**/node_modules
+docs/
+/coverage/
+/build/
+/etc/
+/node/
+/node_modules/
+/target/
+/.project
+/.settings/
+
+/.DS_Store
