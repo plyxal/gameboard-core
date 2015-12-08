@@ -20,7 +20,7 @@ function init(config) {
                     title: 'Monopoly Plus',
                     logoUrl: 'games/monopolyplus/assets/images/monopolyplus.logo.mid.png',
                     css: 'games/monopolyplus/assets/css/monopolyplus.css',
-                    launchCommand: 'chromium-browser --app="http://www.plyxal.com"'
+                    launchCommand: 'chromium-browser --user-data-dir=chrome-data --incognito --window-size=1920,1080 --app="http://www.plyxal.com"'
                 });
 
                 gameDao.seedGame({
