@@ -14,7 +14,7 @@ function init(config) {
      * @param res
      * @param next
      */
-    var getName = function (req, res, next) {
+    var launch = function (req, res, next) {
         var success = function(result) {
             res.send(result);
         };
@@ -23,7 +23,7 @@ function init(config) {
             res.send({error: 'error'});
         };
 
-        systemService.getName(req.params.name)
+        systemService.launch(req.body.command)
             .then(success, fail);
     };
 
@@ -31,6 +31,6 @@ function init(config) {
      * @constructor
       */
     (function(){
-        restify.get('/echo/:name', getName);
+        restify.post('/system/launch', launch);
     }())
 }

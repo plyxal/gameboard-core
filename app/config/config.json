@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "gameboard",
-    "password": "gameboard",
-    "database": "gameboard",
+    "username": "plyxal",
+    "password": "plyxal",
+    "database": "plyxal",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false

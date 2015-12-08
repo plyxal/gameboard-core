@@ -12,9 +12,9 @@
   "sequelize": {
     "path": "config/sequelize.config",
     "config": {
-      "database": "gameboard",
-      "username": "gameboard",
-      "password": "gameboard",
+      "database": "plyxal",
+      "username": "plyxal",
+      "password": "plyxal",
       "host": "127.0.0.1",
       "dialect": "postgres"
     }
