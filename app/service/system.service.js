@@ -16,9 +16,12 @@ function init(config) {
      */
     var launch = function(command) {
         var deferred = Q.defer();
-        //console.log('system.service::launch:command: ', command);
+        console.log('system.service::launch:command: ', command);
 
         exec(command, function(error, stdout, stderr) {
+            console.log('error: ', error);
+            console.log('stdout: ', stdout);
+            console.log('stderr: ', stderr);
             deferred.resolve({error: error, stdout: stdout, stderr: stderr});
         });
 

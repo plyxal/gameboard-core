@@ -1,4 +1,11 @@
 {
+  "debug": {
+    "path": "config/debug.config",
+    "config": {
+      "enabled": true
+    }
+  },
+
   "restify": {
     "path": "config/restify.config",
     "config": {
@@ -17,6 +24,14 @@
       "password": "plyxal",
       "host": "127.0.0.1",
       "dialect": "postgres"
+    }
+  },
+
+  "buttonDeamon": {
+    "path": "daemon/button.daemon",
+    "config": {
+      "enabled": false,
+      "gpioId": 499
     }
   },
 
