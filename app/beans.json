@@ -30,7 +30,7 @@
   "buttonDeamon": {
     "path": "daemon/button.daemon",
     "config": {
-      "enabled": false,
+      "enabled": true,
       "gpioId": 499
     }
   },
