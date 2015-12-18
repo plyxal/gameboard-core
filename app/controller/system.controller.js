@@ -23,7 +23,7 @@ function init(config) {
             res.send({error: 'error'});
         };
 
-        systemService.launch(req.body.command)
+        systemService.launch(req.params.id)
             .then(success, fail);
     };
 
@@ -31,6 +31,6 @@ function init(config) {
      * @constructor
       */
     (function(){
-        restify.post('/system/launch', launch);
+        restify.post('/system/launch/:id', launch);
     }())
 }

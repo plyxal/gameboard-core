@@ -16,6 +16,13 @@ function init(config) {
     */
     var getGames = function (req, res, next) {
         var success = function(result) {
+            //scrub launch commands from response -psmithiv
+            var len = result.length;
+            for(var i=0; i<len; i++) {
+                var item = result[i];
+                delete item.launchCommand;
+            }
+
             res.send(result);
         };
 

@@ -20,6 +20,25 @@ function init(config) {
         return gameModel.findAll();
     };
 
+    /**
+     *
+     * @param id
+     * @returns {{set, expr}|*|{ID, NAME, TAG}}
+     */
+    var getGameById = function(id) {
+        console.log('game.dao::getGameById:id: ', id);
+        return gameModel.find({
+            where: {
+                id: id
+            }
+        });
+    };
+
+    /**
+     *
+     * @param game
+     * @returns {Promise.<Instance, created>}
+     */
     var seedGame = function(game) {
         return gameModel.findOrCreate({
             where: {
@@ -29,6 +48,10 @@ function init(config) {
         });
     };
 
+    /**
+     *
+     * @returns {*|Promise.<Integer>|Promise.<undefined>}
+     */
     var destroyAll = function() {
         return gameModel.destroy({
             where: {}
@@ -37,6 +60,7 @@ function init(config) {
 
     return {
         getGames: getGames,
+        getGameById: getGameById,
         seedGame: seedGame,
         destroyAll: destroyAll
     }

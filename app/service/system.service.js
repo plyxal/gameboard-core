@@ -9,6 +9,7 @@ function init(config) {
     var Q = require('q');
     var exec = require('child_process').exec;
     var wmctrl = require('wmctrl');
+    var gameDao = inject('gameDao');
 
     /**
      * is the home screen active
@@ -40,20 +41,47 @@ function init(config) {
      * @param {String} name
      * @returns {*|promise}
      */
-    var launch = function(command) {
+    var launch = function(id) {
         var deferred = Q.defer();
 
         //TODO: look to see if running app id matches the id we want to launch. if it does, witch to running app -psmithiv
-        var child = exec(command, function(error, stdout, stderr) {
-            //console.log('error: ', error);
-            //console.log('stdout: ', stdout);
-            //console.log('stderr: ', stderr);
-        });
+        if(plyxalAppId == id) {
 
-        appPid = child.pid+1; //add 1 to the pid because /bin/sh is the app running which launches what we want -psmithiv
+        }
 
-        //TODO -psmithiv
-        deferred.resolve();
+        var success = function(game) {
+            plyxalAppId = game.id;
+
+            executeGame(game.launchCommand)
+                .then(deferred.resolve, deferred.reject);
+        };
+
+        var error = function(error) {
+            deferred.reject({error: 'invalid game id'});
+        };
+
+        gameDao.getGameById(id)
+            .then(success, error);
+
+        return deferred.promise;
+    };
+
+    /**
+     *
+     * @param game
+     * @returns {*|promise}
+     */
+    var executeGame = function(launchCommand) {
+        var deferred = Q.defer();
+
+        var child = exec(launchCommand, function(error, stdout, stderr) {});
+
+        //add 1 to the pid because /bin/sh is the app running which launches what we want -psmithiv
+        appPid = child.pid+1;
+
+        console.log('homePid: ', homePid);
+
+        deferred.resolve({message: 'success'});
 
         return deferred.promise;
     };
@@ -94,14 +122,19 @@ function init(config) {
 
             //if we found the window we want, make it active
             if(window) {
-                //TODO: suspend exiting pid
-                //TODO: resume entering pid
+                //suspend exiting pid
+                exec('kill -STOP ' + (homeActive ? appPid : homePid), function(error, stdout, stderr) {});
+
+                //resume entering pid
+                exec('kill -CONT ' + (homeActive ? homePid : appPid), function(error, stdout, stderr) {});
+
+                //activeate window
                 wmctrl.activate(window.id, function (err) {
                     console.log('wmctrl callback: ', err)
                 })
             }
 
-            //throttle button so that it can only be pressed once per second(ish)
+            //throttle swap so that it can only happen once per second(ish)
             setTimeout(function() {
                 executingSwap = false;
                 homeActive = !homeActive;

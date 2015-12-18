@@ -15,12 +15,7 @@ function init(config) {
      * @returns {*|promise}
      */
     var createUser = function(user) {
-        var deferred = Q.defer();
-
-        userModel.create(user)
-            .then(deferred.resolve, deferred.reject);
-
-        return deferred.promise;
+        return userModel.create(user);
     };
 
     return {

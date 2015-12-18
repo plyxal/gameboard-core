@@ -6,6 +6,7 @@ module = module.exports = init;
 function init(config) {
     'use strict';
 
+    var pg = require('pg');
     var Sequelize = require('sequelize');
 
     /**
@@ -19,7 +20,8 @@ function init(config) {
     (function(){
         sequelize = new Sequelize(config.database, config.username, config.password, {
             host: config.host,
-            dialect: config.dialect
+            dialect: config.dialect,
+            native: false
         });
     }());
 
