@@ -44,16 +44,44 @@ function init(config) {
     var launch = function(id) {
         var deferred = Q.defer();
 
-        //TODO: look to see if running app id matches the id we want to launch. if it does, witch to running app -psmithiv
-        if(plyxalAppId == id) {
+       //app currently running, switch to it
+        if(id == plyxalAppId) {
+            swapApplication();
 
+            deferred.resolve({message: 'success'});
+            return defered.promise;
+        }
+
+        //TODO: if switching to new app, display confirmation message to user
+        //launching new app, kill current
+        if(id != plyxalAppId) {
+            killPid(appPid);
         }
 
         var success = function(game) {
             plyxalAppId = game.id;
 
-            executeGame(game.launchCommand)
-                .then(deferred.resolve, deferred.reject);
+            var continueExecute = function() {
+                executeGame(game.launchCommand)
+                    .then(deferred.resolve, deferred.reject);
+            };
+
+            //found game, suspend app launcher
+            if(!homePid) {
+                wmctrl.list(function(err, list) {
+                    //find homePid
+                    for (var i in list) {
+                        if (list[i].title.indexOf('gameboard-ui') > -1) {
+                            homePid = list[i].pid;
+                            break;
+                        }
+                    }
+
+                    continueExecute();
+                });
+            } else {
+                continueExecute();
+            }
         };
 
         var error = function(error) {
@@ -74,12 +102,13 @@ function init(config) {
     var executeGame = function(launchCommand) {
         var deferred = Q.defer();
 
+        homeActive = true;
+        suspendPid(homePid);
+
         var child = exec(launchCommand, function(error, stdout, stderr) {});
 
         //add 1 to the pid because /bin/sh is the app running which launches what we want -psmithiv
         appPid = child.pid+1;
-
-        console.log('homePid: ', homePid);
 
         deferred.resolve({message: 'success'});
 
@@ -97,18 +126,6 @@ function init(config) {
 
         var window;
         wmctrl.list(function(err, list) {
-            var len = list.length;
-
-            //if we don't yet know teh homePid, find it
-            if(!homePid) {
-                for(var i in list) {
-                    if(list[i].title.indexOf('gameboard-ui') > -1) {
-                        homePid = list[i].pid;
-                        break;
-                    }
-                }
-            }
-
             //determine if we should go home or back to app
             var pid = homeActive ? homePid : appPid;
 
@@ -123,15 +140,13 @@ function init(config) {
             //if we found the window we want, make it active
             if(window) {
                 //suspend exiting pid
-                exec('kill -STOP ' + (homeActive ? appPid : homePid), function(error, stdout, stderr) {});
+                suspendPid((homeActive ? appPid : homePid));
 
                 //resume entering pid
-                exec('kill -CONT ' + (homeActive ? homePid : appPid), function(error, stdout, stderr) {});
+                resumePid((homeActive ? homePid : appPid));
 
                 //activeate window
-                wmctrl.activate(window.id, function (err) {
-                    console.log('wmctrl callback: ', err)
-                })
+                wmctrl.activate(window.id, function (err) {})
             }
 
             //throttle swap so that it can only happen once per second(ish)
@@ -140,6 +155,18 @@ function init(config) {
                 homeActive = !homeActive;
             }, 1000);
         });
+    };
+
+    var suspendPid = function(pid) {
+        exec('kill -STOP ' + pid, function(error, stdout, stderr) {});
+    };
+
+    var resumePid = function(pid) {
+        exec('kill -CONT ' + pid, function(error, stdout, stderr) {});
+    };
+
+    var killPid = function(pid) {
+        exec('kill ' + pid, function(error, stdout, stderr) {});
     };
 
     return {
