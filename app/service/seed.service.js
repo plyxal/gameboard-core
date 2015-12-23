@@ -19,7 +19,7 @@ function init(config) {
                 title: 'Monopoly Plus',
                 logoUrl: 'games/monopolyplus/assets/images/monopolyplus.logo.mid.png',
                 css: 'games/monopolyplus/assets/css/monopolyplus.css',
-                launchCommand: 'chromium-browser --user-data-dir=chrome-data --incognito --window-size=1920,1080 --app="http://www.plyxal.com"'
+                launchCommand: 'lxterminal'
             });
         };
 
@@ -72,9 +72,11 @@ function init(config) {
                 title: 'Skylanders',
                 logoUrl: 'games/skylanders/assets/images/skylanders.logo.mid.png',
                 css: 'games/skylanders/assets/css/skylanders.css',
-                launchCommand: 'chromium-browser --user-data-dir=chrome-data --incognito --window-size=1920,1080 --app="http://www.plyxal.com"'
+                launchCommand: 'pcmanfm'
             });
         };
+
+        //'chromium-browser --user-data-dir=chrome-data --password-store=basic --incognito --window-size=1920,1080 --app="http://www.google.com"'
 
         return gameDao.destroyAll()
             .then(createSkylanders)

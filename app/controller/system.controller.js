@@ -15,11 +15,15 @@ function init(config) {
      * @param next
      */
     var launch = function (req, res, next) {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! launch game');
+
         var success = function(result) {
+            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! launch game success');
             res.send(result);
         };
 
         var fail = function(error) {
+            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! launch game fail');
             res.send({error: 'error'});
         };
 
