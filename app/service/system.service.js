@@ -11,241 +11,6 @@ function init(config) {
     var wmctrl = require('wmctrl');
     var gameDao = inject('gameDao');
 
-    //var homePid;
-    //var homeActive = true;
-    //
-    //var gameModel = {};
-    //var childProcess;
-    //
-    //var swappingApplication = false;
-    //
-    //var launch = function(gameId) {
-    //    var deferred = Q.defer();
-    //
-    //    if(gameModel && gameId == gameModel.id) {
-    //        swapApplication()
-    //            .then(deferred.resolve);
-    //    } else {
-    //        getLaunchCommand(gameId)
-    //            .then(killChildProcess)
-    //            .then(suspendHome)
-    //            .then(executeLaunchCommand)
-    //            .then(deferred.resolve);
-    //    }
-    //
-    //    return deferred.promise;
-    //    //if gameId == running game id
-    //        //swap
-    //    //else
-    //        //get launch command for gameId
-    //
-    //        //kill current game
-    //
-    //        //suspend 'home'
-    //
-    //        //launch game
-    //};
-    //
-    //var swapApplication = function() {
-    //    var deferred = Q.defer();
-    //
-    //    if(!homePid || !childProcess || swappingApplication) {
-    //        deferred.reject();
-    //        return deferred.promise;
-    //    }
-    //
-    //    console.log('system.service::swapApplication');
-    //    console.log('system.service::swapApplication::homePid: ', homePid);
-    //    console.log('system.service::swapApplication::childProcess: ', childProcess);
-    //    console.log('system.service::swapApplication::swappingApplication: ', swappingApplication);
-    //
-    //    swappingApplication = true;
-    //
-    //    var swapWindow = function(pid) {
-    //        wmctrl.list(function(err, list) {
-    //            //find window by pid
-    //            for (var window in list) {
-    //                if (list[window].pid == pid) {
-    //                    wmctrl.activate(window.id, function (err) {
-    //                        console.log('system.service::swapApplication::swapWindow::error: ', err);
-    //                    });
-    //
-    //                    break;
-    //                }
-    //            }
-    //
-    //            deferred.resolve();
-    //        });
-    //    };
-    //
-    //    if(homeActive) {
-    //        homeActive = false;
-    //
-    //        suspendHome();
-    //        resumeApp();
-    //
-    //        swapWindow(childProcess.pid);
-    //    } else {
-    //        homeActive = true;
-    //
-    //        suspendApp();
-    //        resumeHome();
-    //
-    //        swapWindow(homePid);
-    //    }
-    //
-    //    setTimeout(function() {
-    //        swappingApplication = false;
-    //        console.log('set swappingApplication = false');
-    //    }, 1000);
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var getLaunchCommand = function(gameId) {
-    //    console.log('system.service::getLaunchCommand: ', gameId);
-    //
-    //    var deferred = Q.defer();
-    //
-    //    var success = function(game) {
-    //        gameModel = game;
-    //
-    //        deferred.resolve();
-    //    };
-    //
-    //    var error = function(error) {
-    //        deferred.reject({error: 'error getting game launch command'});
-    //    };
-    //
-    //    gameDao.getGameById(gameId)
-    //        .then(success, error);
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var killChildProcess = function() {
-    //    console.log('system.service::killChildProcess');
-    //
-    //    var deferred = Q.defer();
-    //
-    //    if(childProcess)
-    //        childProcess.kill();
-    //
-    //    deferred.resolve();
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var executeLaunchCommand = function() {
-    //    console.log('system.service::executeLaunchCommand:gameModel.launchCommand: ', gameModel.launchCommand);
-    //
-    //    var deferred = Q.defer();
-    //
-    //    childProcess = exec(gameModel.launchCommand, function(error, stdout, stderr) {
-    //        console.log('exec::error: ', error);
-    //        console.log('exec::stdout: ', stdout);
-    //        console.log('exec::stderr: ', stderr);
-    //    });
-    //
-    //    childProcess.disconnect()
-    //
-    //    homeActive = false;
-    //
-    //    deferred.resolve();
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var suspendHome = function() {
-    //    console.log('system.service::suspendHome');
-    //
-    //    var deferred = Q.defer();
-    //
-    //    var suspend = function() {
-    //        if(config.suspendResume && homePid) {
-    //            exec('kill -STOP ' + homePid, function (error, stdout, stderr) {
-    //                console.log('!!! suspend homePid::error: ', error);
-    //                console.log('!!! suspend homePid::stdout: ', stdout);
-    //                console.log('!!! suspend homePid::stderr: ', stderr);
-    //            });
-    //        }
-    //
-    //        deferred.resolve();
-    //    };
-    //
-    //    if(!homePid) {
-    //       wmctrl.list(function(err, list) {
-    //           //find homePid
-    //           for (var window in list) {
-    //               if (list[window].title.indexOf('gameboard-ui') > -1) {
-    //                   homePid = list[window].pid;
-    //                   break;
-    //               }
-    //           }
-    //
-    //           suspend();
-    //       });
-    //   } else {
-    //        suspend();
-    //    }
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var resumeHome = function() {
-    //    console.log('system.service::resumeHome');
-    //
-    //    var deferred = Q.defer();
-    //
-    //    if(config.suspendResume && homePid) {
-    //        exec('kill -CONT ' + homePid, function (error, stdout, stderr) {
-    //            console.log('!!! resume homePid::error: ', error);
-    //            console.log('!!! resume homePid::stdout: ', stdout);
-    //            console.log('!!! resume homePid::stderr: ', stderr);
-    //        });
-    //    }
-    //
-    //    deferred.resolve();
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var suspendApp = function() {
-    //    console.log('system.service::suspendApp');
-    //
-    //    var deferred = Q.defer();
-    //
-    //    if(config.suspendResume && childProcess.pid) {
-    //        exec('kill -STOP ' + childProcess.pid, function (error, stdout, stderr) {
-    //            console.log('!!! suspend childProcess.pid::error: ', error);
-    //            console.log('!!! suspend childProcess.pid::stdout: ', stdout);
-    //            console.log('!!! suspend childProcess.pid::stderr: ', stderr);
-    //        });
-    //    }
-    //
-    //    deferred.resolve();
-    //
-    //    return deferred.promise;
-    //};
-    //
-    //var resumeApp = function() {
-    //    console.log('system.service::resumeApp');
-    //
-    //    var deferred = Q.defer();
-    //
-    //    if(config.suspendResume && childProcess.pid) {
-    //        exec('kill -CONT ' + childProcess.pid, function (error, stdout, stderr) {
-    //            console.log('!!! resuem childProcess.pid::error: ', error);
-    //            console.log('!!! resuem childProcess.pid::stdout: ', stdout);
-    //            console.log('!!! resuem childProcess.pid::stderr: ', stderr);
-    //        });
-    //    }
-    //
-    //    deferred.resolve();
-    //
-    //    return deferred.promise;
-    //};
-
     /**
      * is the home screen active
      */
@@ -352,12 +117,8 @@ function init(config) {
             console.log('exec::stderr: ', stderr);
         });
 
-        console.log('set appPid: ', child.pid+1);
         //add 1 to the pid because /bin/sh is the app running which launches what we want -psmithiv
         appPid = child.pid+1;
-
-        //disconnect child process from node!
-        //child.disconnect();
 
         deferred.resolve({message: 'success'});
 
@@ -430,7 +191,6 @@ function init(config) {
                 //find pid
                 for (var i in list) {
                     if (list[i].pid == pid) {
-                        console.log('found window: ', list[i].id.toString(16));
                         var id = '0x0' + list[i].id.toString(16);
                         exec('wmctrl -ic ' + id, function(error, stdout, stderr) {
                             console.log('!!! kill::error: ', error);
@@ -442,16 +202,6 @@ function init(config) {
                 }
             });
         }
-
-        //wmctrl -c 0x04400009
-
-        //if(config.killApp && pid) {
-        //    exec('kill -15 ' + pid, function (error, stdout, stderr) {
-        //        console.log('!!! kill::error: ', error);
-        //        console.log('!!! kill::stdout: ', stdout);
-        //        console.log('!!! kill::stderr: ', stderr);
-        //    });
-        //}
     };
 
     return {
