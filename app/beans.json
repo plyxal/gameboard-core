@@ -88,7 +88,7 @@
   "seed": {
     "path": "service/seed.service",
     "config": {
-      "seedGames": true
+      "seedGames": false
     }
   }
 }
