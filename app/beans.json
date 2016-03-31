@@ -47,6 +47,10 @@
     "path": "controller/game.controller"
   },
 
+  "volumeController": {
+    "path": "controller/volume.controller"
+  },
+
   "systemService": {
     "path": "service/system.service",
     "config": {
@@ -61,6 +65,13 @@
 
   "gameService": {
     "path": "service/game.service"
+  },
+
+  "volumeService": {
+    "path": "service/volume.service",
+    "config": {
+      "enabled": true
+    }
   },
 
   "userDao": {
