@@ -51,6 +51,10 @@
     "path": "controller/volume.controller"
   },
 
+  "brightnessController": {
+    "path": "controller/brightness.controller"
+  },
+
   "systemService": {
     "path": "service/system.service",
     "config": {
@@ -69,6 +73,13 @@
 
   "volumeService": {
     "path": "service/volume.service",
+    "config": {
+      "enabled": true
+    }
+  },
+
+  "brightnessService": {
+    "path": "service/brightness.service",
     "config": {
       "enabled": true
     }
