@@ -7,7 +7,7 @@ function init(config) {
     if(!config.enabled)
         return;
 
-    var Gpio = require('onoff').Gpio;
+    var Gpio = require('vendor/onoff/onoff').Gpio;
     var systemService = inject('systemService');
 
     var buttonPress = function (err, value) {

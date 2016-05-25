@@ -9,14 +9,14 @@ function init(config) {
     var Q = require('q');
 
     //stub loudness so it can be disabled
-    //var loudness = {
-    //    getVolume: function() {},
-    //    setVolume: function() {}
-    //};
+    var loudness = {
+       getVolume: function() {},
+       setVolume: function() {}
+    };
 
     //if enabled, load loudness module
     if(config.enabled)
-        var loudness = require('loudness');
+        var loudness = require('vendor/loudness/index');
 
     /**
      *
@@ -26,7 +26,6 @@ function init(config) {
         var deferred = Q.defer();
 
         loudness.getVolume(function (err, vol) {
-            console.log('loudness.getVolume: ' + err + ' - ' + vol);
             deferred.resolve(vol);
         });
 

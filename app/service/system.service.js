@@ -8,7 +8,7 @@ function init(config) {
 
     var Q = require('q');
     var exec = require('child_process').exec;
-    var wmctrl = require('wmctrl');
+    var wmctrl = require('vendor/wmctrl/index');
     var gameDao = inject('gameDao');
 
     /**
