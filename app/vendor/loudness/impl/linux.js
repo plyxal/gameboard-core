@@ -9,7 +9,6 @@ var amixer = function (args, cb) {
 
   p.stdout.on('data', function (data) {
     ret += data;
-    console.log('stdout: ' + data);
   });
 
   p.stderr.on('data', function (data) {

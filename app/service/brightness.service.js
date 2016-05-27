@@ -7,6 +7,7 @@ function init(config) {
     'use strict';
 
     var Q = require('q');
+    var exec = require('child_process').exec;
 
     /**
      *
@@ -15,7 +16,15 @@ function init(config) {
     var getBrightness = function() {
         var deferred = Q.defer();
 
-        deferred.resolve({value: 50});
+        // deferred.resolve({value: 50});
+
+        exec('xrandr --verbose', function (err, stdout) {
+            var startIndex = stdout.indexOf('Brightness: ') + 12;
+            var endIndex = startIndex + 3;
+            var brightness = stdout.substring(startIndex, endIndex);
+
+            deferred.resolve(brightness);
+        });
 
         return deferred.promise;
     };
@@ -27,7 +36,10 @@ function init(config) {
     var putBrightness = function(value) {
         var deferred = Q.defer();
 
-        deferred.resolve({value: 50});
+        exec('xrandr --output HDMI1 --brightness ' + value, function (err, stdout) {
+            deferred.resolve(value);
+        });
+
         
         return deferred.promise;
     };

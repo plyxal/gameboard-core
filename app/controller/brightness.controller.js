@@ -17,12 +17,10 @@ function init(config) {
      */
     var getBrightness = function (req, res, next) {
         var success = function(result) {
-            console.log('brightness.controller::getBrightness::success: ', result);
-            res.send(result);
+            res.send({value: result * 100});
         };
 
         var fail = function(error) {
-            console.log('brightness.controller::getBrightness::fail: ', error);
             res.send(error);
         };
 
@@ -36,18 +34,16 @@ function init(config) {
      * @param res
      * @param next
      */
-    var setBrightness = function (req, res, next) {
+    var putBrightness = function (req, res, next) {
         var success = function(result) {
-            console.log('brightness.controller::setBrightness::success: ', result);
-            res.send(result);
+            res.send({value: result});
         };
 
         var fail = function(error) {
-            console.log('brightness.controller::setBrightness::fail: ', error);
             res.send(error);
         };
 
-        brightnessService.getBrightness(req.params.value)
+        brightnessService.putBrightness(req.params.value)
             .then(success, fail);
     };
 
@@ -56,5 +52,6 @@ function init(config) {
      */
     (function(){
         restify.get('/brightness', getBrightness);
+        restify.put('/brightness/:value', putBrightness);
     }())
 }

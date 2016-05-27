@@ -5,6 +5,7 @@ exports = module.exports = init;
 
 function init(config) {
     'use strict';
+    
     var restify = inject('restify');
     var volumeService = inject('volumeService');
 
