@@ -163,7 +163,7 @@ function init(config) {
             setTimeout(function() {
                 executingSwap = false;
                 homeActive = !homeActive;
-            }, 1000);
+            }, 200);
         });
     };
 

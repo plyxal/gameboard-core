@@ -7,16 +7,7 @@ function init(config) {
     'use strict';
 
     var Q = require('q');
-
-    //stub loudness so it can be disabled
-    var loudness = {
-       getVolume: function() {},
-       setVolume: function() {}
-    };
-
-    //if enabled, load loudness module
-    if(config.enabled)
-        var loudness = require('vendor/loudness/index');
+    var loudness = require('vendor/loudness/index');
 
     /**
      *

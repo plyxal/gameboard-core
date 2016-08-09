@@ -4,9 +4,6 @@
 exports = module.exports = init;
 
 function init(config) {
-    if(!config.enabled)
-        return;
-
     var Gpio = require('vendor/onoff/onoff').Gpio;
     var systemService = inject('systemService');
 

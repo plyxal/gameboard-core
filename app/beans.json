@@ -30,7 +30,6 @@
   "buttonDeamon": {
     "path": "daemon/button.daemon",
     "config": {
-      "enabled": false,
       "gpioId": 499
     }
   },
@@ -78,7 +77,7 @@
   "volumeService": {
     "path": "service/volume.service",
     "config": {
-      "enabled": true
+
     }
   },
 
@@ -92,7 +91,6 @@
   "wifiService": {
     "path": "service/wifi.service",
     "config": {
-      "enabled": true,
       "iface": "wlx00c316a0c9bb",
       "updateFrequency": 10,
       "connectionSpyFrequency": 2,
