@@ -20,11 +20,6 @@ function init(config) {
             deferred.resolve(vol);
         });
 
-        //if not enabled, mock result
-        if(!config.enabled)
-            deferred.resolve({value: 50});
-
-
         return deferred.promise;
     };
 
@@ -38,10 +33,6 @@ function init(config) {
         loudness.setVolume(value, function (err) {
             deferred.resolve(value)
         });
-
-        //if not enabled, mock result
-        if(!config.enabled)
-            deferred.resolve({value: value});
 
         return deferred.promise;
     };

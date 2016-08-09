@@ -8,15 +8,7 @@ function init(config) {
 
     var Q = require('q');
 
-    var networkManager = require('vendor/node-networkmanager-master/index');
-
-    networkManager.connect(function (error, networkmanager) {
-        console.log('networkmanager.NetworkManager: ', networkmanager.NetworkManager);
-        
-        networkmanager.NetworkManager.GetVersion(function (error, Version) {
-            console.log("NetworkManager Version: " + Version);
-        });
-    });
+    var WiFiControl = require('wifi-control');
 
     /**
      * 
@@ -25,13 +17,17 @@ function init(config) {
     var getNetworks = function () {
         var deferred = Q.defer();
 
-        // networkManager.connect(function (error, networkmanager) {
-        //     networkmanager.NetworkManager.GetVersion(function (error, Version) {
-        //         console.log("NetworkManager Version: " + Version);
-        //     });
-        // });
+        WiFiControl.scanForWiFi( function(err, response) {
+            if (err) {
+                console.log('reject: ', err);
+                return Q.reject(err);
+            }
 
-        deferred.resolve({});
+            console.log('resolve: ', response);
+            deferred.resolve(response);
+        });
+
+
 
         return deferred.promise;
     };
@@ -40,7 +36,10 @@ function init(config) {
      * @constructor
      */
     (function() {
-
+        WiFiControl.init({
+            debug: config.debug,
+            iface: config.iface
+        });
     }());
 
     return {

@@ -76,9 +76,7 @@
 
   "volumeService": {
     "path": "service/volume.service",
-    "config": {
-
-    }
+    "config": {}
   },
 
   "brightnessService": {
@@ -91,10 +89,8 @@
   "wifiService": {
     "path": "service/wifi.service",
     "config": {
-      "iface": "wlx00c316a0c9bb",
-      "updateFrequency": 10,
-      "connectionSpyFrequency": 2,
-      "vanishThreshold": 2
+      "debug": true,
+      "iface": "dev"
     }
   },
 

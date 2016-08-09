@@ -17,7 +17,7 @@ function init(config) {
      */
     var getNetworks = function (req, res, next) {
         var success = function(result) {
-            res.send({networks: result});
+            res.send({networks: result.networks});
         };
 
         var fail = function(error) {

@@ -11,17 +11,13 @@
   "license": "Copyright 2015",
   "dependencies": {
     "async": "^2.0.1",
-    "dbus": "^0.2.19",
-    "debug": "^2.2.0",
-    "netmask": "^1.0.6",
+    "lodash": "^4.14.2",
     "nioc": "^2.1.2",
     "node-monkey": "^0.2.16",
-    "node.extend": "^1.1.5",
     "pg": "^4.5.5",
     "pg-hstore": "^2.3.2",
     "q": "^1.4.1",
     "restify": "^4.1.0",
-    "sequelize": "^3.23.2",
-    "wireless": "^0.3.2"
+    "sequelize": "^3.23.2"
   }
 }
