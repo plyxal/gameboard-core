@@ -12,6 +12,7 @@
   "dependencies": {
     "async": "^2.0.1",
     "dbus": "^0.2.19",
+    "debug": "^2.2.0",
     "netmask": "^1.0.6",
     "nioc": "^2.1.2",
     "node-monkey": "^0.2.16",
