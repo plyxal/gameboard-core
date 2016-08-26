@@ -16,8 +16,6 @@ function init(config) {
     var getBrightness = function() {
         var deferred = Q.defer();
 
-        // deferred.resolve({value: 50});
-
         exec('xrandr --verbose', function (err, stdout) {
             var startIndex = stdout.indexOf('Brightness: ') + 12;
             var endIndex = startIndex + 3;

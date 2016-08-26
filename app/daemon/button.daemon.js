@@ -8,6 +8,9 @@ function init(config) {
     var systemService = inject('systemService');
 
     var buttonPress = function (err, value) {
+        console.log('button.daemon:buttonPress::err: ', err);
+        console.log('button.daemon:buttonPress::value: ', value);
+
         if (err) {
             throw err;
         }
