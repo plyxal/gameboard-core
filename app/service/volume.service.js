@@ -17,6 +17,9 @@ function init(config) {
         var deferred = Q.defer();
 
         loudness.getVolume(function (err, vol) {
+            console.log('getVolume::err: ', err);
+            console.log('getVolume::vol: ', vol);
+
             deferred.resolve(vol);
         });
 
@@ -31,6 +34,9 @@ function init(config) {
         var deferred = Q.defer();
 
         loudness.setVolume(value, function (err) {
+            console.log('putVoluem::value: ', value);
+            console.log('putVoluem::err: ', err);
+
             deferred.resolve(value)
         });
 

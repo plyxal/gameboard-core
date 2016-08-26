@@ -8,6 +8,7 @@ function init(config) {
 
     var Q = require('q');
     var exec = require('child_process').exec;
+    var storage = require('node-persist');
 
     /**
      *
@@ -35,12 +36,33 @@ function init(config) {
         var deferred = Q.defer();
 
         exec('xrandr --output HDMI1 --brightness ' + value, function (err, stdout) {
+            storage.setItemSync('brightness', value);
             deferred.resolve(value);
         });
 
         
         return deferred.promise;
     };
+
+    (function() {
+        console.log('init brightness');
+
+        storage.initSync({
+            dir: '/home/gameboard/persist',
+            stringify: JSON.stringify,
+            parse: JSON.parse,
+            encoding: 'utf8',
+            logging: false,  // can also be custom logging function
+            continuous: true,
+            interval: false, // milliseconds
+            ttl: false // ttl* [NEW], can be true for 24h default or a number in MILLISECONDS
+        });
+
+        var brightness = storage.getItemSync('brightness');
+        console.log('brightness: ', brightness);
+
+        putBrightness(brightness ? brightness : 1);
+    })();
 
     return {
         getBrightness: getBrightness,
