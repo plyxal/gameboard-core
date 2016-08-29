@@ -19,15 +19,22 @@ function init(config) {
 
         WiFiControl.scanForWiFi( function(err, response) {
             if (err) {
-                console.log('reject: ', err);
                 return Q.reject(err);
             }
 
-            console.log('resolve: ', response);
             deferred.resolve(response);
         });
 
 
+
+        return deferred.promise;
+    };
+
+    var getConnectionState = function() {
+        var deferred = Q.defer();
+
+        var state = WiFiControl.getIfaceState();
+        deferred.resolve(state);
 
         return deferred.promise;
     };
@@ -37,12 +44,12 @@ function init(config) {
      */
     (function() {
         WiFiControl.init({
-            debug: config.debug,
-            iface: config.iface
+            debug: config.debug
         });
     }());
 
     return {
-        getNetworks: getNetworks
+        getNetworks: getNetworks,
+        getConnectionState: getConnectionState
     }
 }
