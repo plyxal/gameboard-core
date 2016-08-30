@@ -39,6 +39,20 @@ function init(config) {
         return deferred.promise;
     };
 
+    var connectWifi = function(accessPoint) {
+        var deferred = Q.defer();
+
+        WiFiControl.connectToAP(accessPoint, function(err, response) {
+           if(err) {
+               return Q.reject(err);
+           }
+
+           deferred.resolve({accessPoint: accessPoint});
+        });
+
+        return deferred.promise;
+    };
+
     /**
      * @constructor
      */
@@ -50,6 +64,7 @@ function init(config) {
 
     return {
         getNetworks: getNetworks,
-        getConnectionState: getConnectionState
+        getConnectionState: getConnectionState,
+        connectWifi: connectWifi
     }
 }

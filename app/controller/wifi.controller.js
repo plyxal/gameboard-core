@@ -30,7 +30,6 @@ function init(config) {
 
     var getConnectionState = function(req, res, next) {
         var success = function(result) {
-            console.log('getConnectionState: ', result);
             res.send({state: result});
         };
 
@@ -42,11 +41,25 @@ function init(config) {
             .then(success, fail);
     };
 
+    var connectWifi = function(req, res, next) {
+        var success = function(result) {
+            res.send(result);
+        };
+
+        var fail = function(error) {
+            res.send(error);
+        };
+
+        wifiService.connectWifi(req.body)
+            .then(success, fail);
+    };
+
     /**
      * @constructor
      */
     (function(){
         restify.get('/wifi/networks', getNetworks);
         restify.get('/wifi/state', getConnectionState);
+        restify.post('/wifi/connect', connectWifi);
     }())
 }
