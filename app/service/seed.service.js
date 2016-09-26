@@ -76,6 +76,19 @@ function init(config) {
             });
         };
 
+        var createPong = function() {
+            return gameDao.seedGame({
+                route: '/pong',
+                templateUrl: 'games/pong/partials/view/pong.html',
+                controller: 'pongController',
+                controllerUrl: 'games/pong/js/controller/pong.controller',
+                title: 'Pong',
+                logoUrl: 'games/pong/assets/images/logo.png',
+                css: 'games/pong/assets/css/pong.css',
+                launchCommand: '/home/gameboard/Documents/Pong/pong.x86_64'
+            });
+        };
+
         //'chromium-browser --user-data-dir=chrome-data --password-store=basic --incognito --window-size=1920,1080 --app="http://www.google.com"'
 
         return gameDao.destroyAll()
@@ -83,8 +96,8 @@ function init(config) {
             .then(createMonopoly)
             .then(createScrabble)
             .then(createLauraGo)
+            .then(createPong)
             .then(createBattle)
-
     };
 
     (function() {
