@@ -61,7 +61,7 @@
   "systemService": {
     "path": "service/system.service",
     "config": {
-      "suspendResume": true,
+      "suspendResume": false,
       "killApp": true
     }
   },
@@ -118,7 +118,7 @@
   "seed": {
     "path": "service/seed.service",
     "config": {
-      "seedGames": true
+      "seedGames": false
     }
   }
 }

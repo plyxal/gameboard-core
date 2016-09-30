@@ -136,6 +136,7 @@ function init(config) {
 
         var window;
         wmctrl.list(function(err, list) {
+            console.log('window list: ', list);
             //determine if we should go home or back to app
             var pid = homeActive ? homePid : appPid;
 

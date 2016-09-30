@@ -29,6 +29,7 @@ wmctrl.list = function(cb) {
     if(err) return cb(err, null);
     var hash = {};
     var wnds = data.split('\n').filter(Boolean).map(function(line) {
+      console.log('line: ', line);
       var parser = new Parser(line);
       var wnd = {
         id: parser.hex(),
