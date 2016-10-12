@@ -10,42 +10,30 @@ function init(config) {
     var gameDao = inject('gameDao');
 
     var seedGames = function() {
+
+        var createSkylanders = function() {
+            return gameDao.seedGame({
+                route: '/skylanders',
+                templateUrl: 'games/skylanders/partials/view/skylanders.html',
+                controller: 'skylandersController',
+                controllerUrl: 'games/skylanders/js/controller/skylanders.controller',
+                title: 'Skylanders',
+                logoUrl: 'games/skylanders/assets/images/logo.png',
+                css: 'games/skylanders/assets/css/skylanders.css',
+                launchCommand: 'pcmanfm'
+            });
+        };
+
         var createMonopoly = function() {
             return gameDao.seedGame({
                 route: '/monopolyplus',
-                templateUrl: 'games/monopolyplus/partials/view/monopolyplus.html',
-                controller: 'monopolyplusController',
-                controllerUrl: 'games/monopolyplus/js/controller/monopolyplus.controller',
+                templateUrl: 'games/monopolyplus/partials/view/monopoly.plus.html',
+                controller: 'monopolyPlusController',
+                controllerUrl: 'games/monopolyplus/js/controller/monopoly.plus.controller',
                 title: 'Monopoly Plus',
-                logoUrl: 'games/monopolyplus/assets/images/monopolyplus.logo.mid.png',
-                css: 'games/monopolyplus/assets/css/monopolyplus.css',
+                logoUrl: 'games/monopolyplus/assets/images/logo.png',
+                css: 'games/monopolyplus/assets/css/monopoly.plus.css',
                 launchCommand: 'lxterminal'
-            });
-        };
-
-        var createBattle = function() {
-            return gameDao.seedGame({
-                route: '/battle',
-                templateUrl: 'games/battle/partials/view/battle.html',
-                controller: 'battleController',
-                controllerUrl: 'games/battle/js/controller/battle.controller',
-                title: 'Battle',
-                logoUrl: '',
-                css: 'games/battle/assets/css/battle.css',
-                launchCommand: ''
-            });
-        };
-
-        var createLauraGo = function() {
-            return gameDao.seedGame({
-                route: '/laurago',
-                templateUrl: 'games/laurago/partials/view/laurago.html',
-                controller: 'lauragoController',
-                controllerUrl: 'games/laurago/js/controller/laurago.controller',
-                title: 'Laura Craft Go',
-                logoUrl: 'games/laurago/assets/images/logo.png',
-                css: '',
-                launchCommand: ''
             });
         };
 
@@ -56,23 +44,22 @@ function init(config) {
                 controller: 'scrabbleController',
                 controllerUrl: 'games/scrabble/js/controller/scrabble.controller',
                 title: 'Scrabble',
-                logoUrl: 'games/scrabble/assets/images/scrabble.logo.mid.3.png',
-                css: '',
+                logoUrl: 'games/scrabble/assets/images/logo.png',
+                css: 'games/scrabble/assets/css/scrabble.css',
                 launchCommand: ''
             });
         };
 
-
-        var createSkylanders = function() {
+        var createLauraGo = function() {
             return gameDao.seedGame({
-                route: '/skylanders',
-                templateUrl: 'games/skylanders/partials/view/skylanders.html',
-                controller: 'skylandersController',
-                controllerUrl: 'games/skylanders/js/controller/skylanders.controller',
-                title: 'Skylanders',
-                logoUrl: 'games/skylanders/assets/images/skylanders.logo.mid.png',
-                css: 'games/skylanders/assets/css/skylanders.css',
-                launchCommand: 'pcmanfm'
+                route: '/larago',
+                templateUrl: 'games/larago/partials/view/lara.go.html',
+                controller: 'laraGoController',
+                controllerUrl: 'games/larago/js/controller/lara.go.controller',
+                title: 'Laura Craft Go',
+                logoUrl: 'games/larago/assets/images/logo.png',
+                css: 'games/larago/assets/css/lara.go.css',
+                launchCommand: ''
             });
         };
 
@@ -89,15 +76,12 @@ function init(config) {
             });
         };
 
-        //'chromium-browser --user-data-dir=chrome-data --password-store=basic --incognito --window-size=1920,1080 --app="http://www.google.com"'
-
         return gameDao.destroyAll()
             .then(createSkylanders)
             .then(createMonopoly)
             .then(createScrabble)
             .then(createLauraGo)
             .then(createPong)
-            .then(createBattle)
     };
 
     (function() {
