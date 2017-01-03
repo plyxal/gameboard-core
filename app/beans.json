@@ -89,7 +89,7 @@
   "wifiService": {
     "path": "service/wifi.service",
     "config": {
-      "debug": true
+      "debug": false
     }
   },
 

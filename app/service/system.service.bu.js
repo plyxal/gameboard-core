@@ -117,10 +117,8 @@ function init(config) {
             console.log('exec::stderr: ', stderr);
         });
 
-        console.log('child: ', child);
-
         //add 1 to the pid because /bin/sh is the app running which launches what we want -psmithiv
-        appPid = child.pid +1;
+        appPid = child.pid+1;
 
         deferred.resolve({message: 'success'});
 
@@ -144,7 +142,6 @@ function init(config) {
 
             //find window by pid
             for(var ii in list) {
-                console.log('list[ii]: ', list[ii]);
                 if(list[ii].pid == pid) {
                     window = list[ii];
                     break
